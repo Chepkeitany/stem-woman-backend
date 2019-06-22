@@ -20,7 +20,14 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  'GET /health': { action: 'health/index' },
+  'GET /health':        { action: 'health/index' },
+  'GET /scholarships':  { action: 'scholarship/view-scholarships' },
+  'GET /conferences':   { action: 'conference/view-conferences' },
+  'GET /heroines':      { action: 'heroine/view-heroines' },
+  'GET /mentors':       { action: 'mentor/view-mentors' },
+
+
+
 
 
   /***************************************************************************

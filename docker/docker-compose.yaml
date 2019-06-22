@@ -20,5 +20,7 @@ services:
        - POSTGRES_PASSWORD=My5@Pwd1234
        - POSTGRES_USER=geek
        - POSTGRES_DB=stem-woman
+    volumes:
+      - "./tmp/postgres/data:/var/lib/postgresql/data/pgdata"
 
   

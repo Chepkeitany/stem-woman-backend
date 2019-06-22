@@ -17,7 +17,7 @@ module.exports.blueprints = {
   *                                                                          *
   ***************************************************************************/
 
-  // actions: false,
+  actions: false,
 
 
   /***************************************************************************
@@ -26,7 +26,7 @@ module.exports.blueprints = {
   *                                                                          *
   ***************************************************************************/
 
-  // rest: true,
+  rest: false,
 
 
   /***************************************************************************
@@ -36,6 +36,24 @@ module.exports.blueprints = {
   *                                                                          *
   ***************************************************************************/
 
-  // shortcuts: true,
+  shortcuts: false,
+  /**
+   * Used information from.
+   * https://sailsjs.com/documentation/reference/configuration/sails-config-blueprints
+   */
+  parseBlueprintOptions: function(req) {
 
+    // Get the default query options.
+    var queryOptions = req._sails.hooks.blueprints.parseBlueprintOptions(req);
+
+    // If this is the "find" or "populate" blueprint action, and the normal query options
+    // indicate that the request is attempting to set an exceedingly high `limit` clause,
+    // then prevent it (we'll say `limit` must not exceed 300).
+    if (req.options.blueprintAction === 'find' || req.options.blueprintAction === 'populate') {
+      queryOptions.criteria.limit = 300;
+    }
+
+    return queryOptions;
+
+  }
 };
