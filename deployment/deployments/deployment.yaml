@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: stem-woman
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: stem-woman
+        tier: backend
+        type: api
+        name: api
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: stem-woman
+        image: gcr.io/kubernetes-intro-226510/stem-woman:1.0.1
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 1500
+            scheme: HTTP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 1500
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        envFrom:
+          - secretRef:
+              name: stem-woman-secrets
+          - configMapRef:
+              name: stem-woman-configmaps
+        ports:
+          - containerPort: 1500
