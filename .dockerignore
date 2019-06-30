@@ -1,0 +1,11 @@
+.git
+.gitignore
+.idea
+.DS_Store
+.editorconfig
+.circleci
+deployment
+docker
+application/node_modules/*
+application/config/local.js
+application/.tmp

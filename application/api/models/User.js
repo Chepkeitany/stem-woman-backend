@@ -11,6 +11,7 @@ module.exports = {
     id:               { type:'string', required:true, isUUID:true, unique:true },
     name:             { type:'string', required:true },
     email_address:    { type:'string', required:true, unique:true },
+    type:             { type:'string', required:true }
   },
 
 };

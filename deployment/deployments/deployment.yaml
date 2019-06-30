@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: stem-woman
-        image: gcr.io/kubernetes-intro-226510/stem-woman:1.0.1
+        image: gcr.io/kubernetes-intro-226510/stem-woman:1.0.10
         readinessProbe:
           httpGet:
             path: /health
@@ -32,7 +32,23 @@ spec:
         envFrom:
           - secretRef:
               name: stem-woman-secrets
+          - secretRef:
+              name: cloudsql-db-credentials
           - configMapRef:
               name: stem-woman-configmaps
         ports:
           - containerPort: 1500
+      - name: cloudsql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.12
+        command:
+          - /cloud_sql_proxy
+          - -instances=kubernetes-intro-226510:europe-west1:stem-woman=tcp:5432
+          - -credential_file=/secrets/cloudsql/credentials.json
+        volumeMounts:
+          - name: cloudsql-instance-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials

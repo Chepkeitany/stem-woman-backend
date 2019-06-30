@@ -30,7 +30,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "start": "NODE_ENV=development node app.js",
+    "start": "node app.js",
     "dev": "NODE_ENV=development ./node_modules/nodemon/bin/nodemon.js",
     "format": "eslint . --max-warnings=0 --report-unused-disable-directives --fix && echo '✔  Your .js files have been formatted.'",
     "test": "yarn lint && yarn custom-tests && echo 'Done.'",

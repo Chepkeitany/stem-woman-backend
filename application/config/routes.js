@@ -20,12 +20,17 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  'GET /health':        { action: 'health/index' },
-  'GET /scholarships':  { action: 'scholarship/view-scholarships' },
-  'GET /conferences':   { action: 'conference/view-conferences' },
-  'GET /heroines':      { action: 'heroine/view-heroines' },
-  'GET /mentors':       { action: 'mentor/view-mentors' },
-
+  'GET /health':             { action: 'health/index' },
+  'GET /scholarships':       { action: 'scholarship/view-scholarships' },
+  'GET /conferences':        { action: 'conference/view-conferences' },
+  'GET /heroines':           { action: 'heroine/view-heroines' },
+  'GET /mentors':            { action: 'mentor/view-mentors' },
+  'GET /mentor':             { action: 'mentor/view-mentor' },
+  'POST /conference':        { action: 'conference/create-conference'},
+  'POST /heroine':           { action: 'heroine/create-heroine'},
+  'POST /mentor':            { action: 'mentor/create-mentor'},
+  'POST /scholarship':       { action: 'scholarship/create-scholarship'},
+  'POST /user':              { action: 'user/create-user' },
 
 
 
