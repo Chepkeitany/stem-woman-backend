@@ -5,23 +5,23 @@ deploy_k8s() {
 	echo  #
   if [[ $REPLY =~ ^[Yy]$ ]]; then
 		echo "Configuring configMaps..."
-    kubectl delete configmap $app-configmaps -n $namespace --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman || echo "Failed to delete deployment configmap. OK for first time deployment."
-    kubectl create configmap $app-configmaps -n $namespace --from-env-file=configmaps/.env.$environment --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman
+    kubectl delete configmap $app-configmaps -n $namespace --cluster gke_stem-woman_europe-west1-b_stem-woman || echo "Failed to delete deployment configmap. OK for first time deployment."
+    kubectl create configmap $app-configmaps -n $namespace --from-env-file=configmaps/.env.$environment --cluster gke_stem-woman_europe-west1-b_stem-woman
 		echo "Configuring secrets..."
-    kubectl delete secret $app-secrets -n $namespace --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman || echo "Failed to delete deployment secret. OK for first time deployment."
-    kubectl create secret generic $app-secrets  -n $namespace --from-env-file=secrets/.env.$environment  --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman
+    kubectl delete secret $app-secrets -n $namespace --cluster gke_stem-woman_europe-west1-b_stem-woman || echo "Failed to delete deployment secret. OK for first time deployment."
+    kubectl create secret generic $app-secrets  -n $namespace --from-env-file=secrets/.env.$environment  --cluster gke_stem-woman_europe-west1-b_stem-woman
 		echo "Configuring services..."
-		kubectl apply -n $namespace -f services --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman
+		kubectl apply -n $namespace -f services --cluster gke_stem-woman_europe-west1-b_stem-woman
 		echo "Configuring ingress..."
-		kubectl apply -f ingress/$environment.yaml --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman
+		kubectl apply -f ingress/$environment.yaml --cluster gke_stem-woman_europe-west1-b_stem-woman
 	fi
 
   if [ $environment == "development" ]; then
 		echo "Configuring deployments..."
-		kubectl apply -n $namespace -f deployments/dev/deployment.yaml --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman
+		kubectl apply -n $namespace -f deployments/dev/deployment.yaml --cluster gke_stem-woman_europe-west1-b_stem-woman
   else
 		echo "Configuring deployments..."
-		kubectl apply -n $namespace -f deployments/deployment.yaml --cluster gke_kubernetes-intro-226510_europe-west1-b_stem-woman
+		kubectl apply -n $namespace -f deployments/deployment.yaml --cluster gke_stem-woman_europe-west1-b_stem-woman
   fi
 }
 
