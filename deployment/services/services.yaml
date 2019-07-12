@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: stem-woman
+  name: stem-woman-api
   labels:
     app: stem-woman
     tier: backend
@@ -13,6 +13,3 @@ spec:
     targetPort: 1500
   selector:
     app: stem-woman
-    tier: backend
-    type: api
-    name: api
