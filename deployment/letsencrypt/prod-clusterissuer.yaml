@@ -9,7 +9,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: anne.chepkeitany@gmail.com
+    email: stemwoman1990@gmail.com
     privateKeySecretRef:
       name: letsencrypt-prod
     http01: {}
