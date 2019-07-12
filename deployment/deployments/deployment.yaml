@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: stem-woman
+  name: stem-woman-api
 spec:
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 1
   template:
     metadata:
@@ -15,8 +15,8 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-      - name: stem-woman
-        image: gcr.io/kubernetes-intro-226510/stem-woman:1.0.10
+      - name: stem-woman-api
+        image: gcr.io/stem-woman/stem-woman:1.0.1
         readinessProbe:
           httpGet:
             path: /health
@@ -31,18 +31,18 @@ spec:
           timeoutSeconds: 5
         envFrom:
           - secretRef:
-              name: stem-woman-secrets
+              name: stem-woman-api-secrets
           - secretRef:
               name: cloudsql-db-credentials
           - configMapRef:
-              name: stem-woman-configmaps
+              name: stem-woman-api-configmaps
         ports:
           - containerPort: 1500
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.12
         command:
           - /cloud_sql_proxy
-          - -instances=kubernetes-intro-226510:europe-west1:stem-woman=tcp:5432
+          - -instances=stem-woman:europe-west1:stem-woman=tcp:5432
           - -credential_file=/secrets/cloudsql/credentials.json
         volumeMounts:
           - name: cloudsql-instance-credentials
