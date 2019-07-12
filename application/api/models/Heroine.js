@@ -14,7 +14,7 @@ module.exports = {
     description:  { type:'string', required:true },
     period_alive: { type:'string' },
     category:     { type:'string',required: true,
-      isIn: ['pioneer', 'unsung_hero', 'modern'] }
+      isIn: ['pioneer', 'untold_stories', 'modern_women'] }
   },
 
 };
