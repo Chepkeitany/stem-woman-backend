@@ -25,6 +25,7 @@ module.exports.routes = {
   'GET /conferences':        { action: 'conference/view-conferences' },
   'GET /heroines':           { action: 'heroine/view-heroines' },
   'GET /mentors':            { action: 'mentor/view-mentors' },
+  'GET /resources':          { action: 'resource/view-resources' },
   'GET /mentor':             { action: 'mentor/view-mentor' },
   'POST /conference':        { action: 'conference/create-conference'},
   'POST /heroine':           { action: 'heroine/create-heroine'},
