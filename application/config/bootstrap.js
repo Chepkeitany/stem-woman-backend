@@ -8,23 +8,36 @@
  * For more information on seeding your app with fake data, check out:
  * https://sailsjs.com/config/bootstrap
  */
+const uuid = require('uuid/v4');
+const Chance = require('chance');
+const chance = new Chance();
 
-module.exports.bootstrap = async function() {
+module.exports.bootstrap = async function () {
+  const users = await User.count();
 
-  // By convention, this is a good place to set up fake data during development.
-  //
-  // For example:
-  // ```
-  // // Set up fake development data (or if we already have some, avast)
-  // if (await User.count() > 0) {
-  //   return;
-  // }
-  //
-  // await User.createEach([
-  //   { emailAddress: 'ry@example.com', fullName: 'Ryan Dahl', },
-  //   { emailAddress: 'rachael@example.com', fullName: 'Rachael Shaw', },
-  //   // etc.
-  // ]);
-  // ```
-
+  if (users) {
+    return;
+  }
+  else {
+    if (process.env.NODE_ENV === 'development') {
+      await User.createEach([
+        {
+          id: uuid(),
+          created_at: Date.now(),
+          updated_at: Date.now(),
+          email_address: chance.email(),
+          name: chance.name(),
+          type: 'mentor'
+        },
+        {
+          id: uuid(),
+          created_at: Date.now(),
+          updated_at: Date.now(),
+          email_address: chance.email(),
+          name: chance.name(),
+          type: 'general'
+        },
+      ]);
+    }
+  }
 };
