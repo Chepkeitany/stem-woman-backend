@@ -18,7 +18,7 @@ deploy_k8s() {
 
   if [ $environment == "development" ]; then
 		echo "Configuring deployments..."
-		kubectl apply -n $namespace -f deployments/dev/deployment.yaml --cluster gke_stem-woman_europe-west1-b_stem-woman
+		kubectl apply -n $namespace -f deployments/deployment.yaml --cluster gke_stem-woman_europe-west1-b_stem-woman
   else
 		echo "Configuring deployments..."
 		kubectl apply -n $namespace -f deployments/deployment.yaml --cluster gke_stem-woman_europe-west1-b_stem-woman

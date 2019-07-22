@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: stem-woman-api
-        image: gcr.io/stem-woman/stem-woman:1.0.1
+        image: gcr.io/stem-woman/stem-woman:1.0.2
         readinessProbe:
           httpGet:
             path: /health
